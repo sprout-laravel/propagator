@@ -36,7 +36,7 @@
       "email": "code@ollieread.com"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "scripts"          : {
     "post-autoload-dump": [
       "@clear",
