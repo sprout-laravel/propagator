@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Sprout\Propagator\Drivers\Tenancies;
 
 use Sprout\Propagator\Contracts\DriverWizard;
+use Sprout\Propagator\Contracts\Field;
 use Sprout\Propagator\Fields\ArrayField;
 use Sprout\Propagator\Fields\TextField;
 
@@ -13,8 +14,6 @@ use Sprout\Propagator\Fields\TextField;
  * Driver wizard for the default tenancy driver. Collects the provider name
  * that the tenancy will use to load tenants, and an optional options array
  * for additional tenancy configuration.
- *
- * @package Drivers\Tenancies
  */
 final class DefaultTenancyWizard implements DriverWizard
 {
@@ -41,7 +40,7 @@ final class DefaultTenancyWizard implements DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {

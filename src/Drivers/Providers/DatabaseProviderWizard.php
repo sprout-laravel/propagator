@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Sprout\Propagator\Drivers\Providers;
 
 use Sprout\Propagator\Contracts\DriverWizard;
+use Sprout\Propagator\Contracts\Field;
 use Sprout\Propagator\Fields\ClassField;
 use Sprout\Propagator\Fields\TextField;
 
@@ -12,8 +13,6 @@ use Sprout\Propagator\Fields\TextField;
  *
  * Driver wizard for the database tenant provider. Collects the database table,
  * optional entity class, and optional connection name.
- *
- * @package Drivers\Providers
  */
 final class DatabaseProviderWizard implements DriverWizard
 {
@@ -40,7 +39,7 @@ final class DatabaseProviderWizard implements DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {

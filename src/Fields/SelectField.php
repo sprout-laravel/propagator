@@ -7,18 +7,9 @@ namespace Sprout\Propagator\Fields;
  * Select Field
  *
  * A field that presents a list of options for the user to choose from.
- *
- * @package Fields
  */
 final class SelectField extends BaseField
 {
-    /**
-     * The available options
-     *
-     * @var array<string, string>
-     */
-    private array $options = [];
-
     /**
      * Create a new select field
      *
@@ -30,6 +21,13 @@ final class SelectField extends BaseField
     {
         return new self($name);
     }
+
+    /**
+     * The available options
+     *
+     * @var array<string, string>
+     */
+    private array $options = [];
 
     /**
      * Get the type identifier for this field

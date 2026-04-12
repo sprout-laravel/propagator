@@ -11,8 +11,6 @@ use Sprout\Propagator\Drivers\Providers\EloquentProviderWizard;
  *
  * Config category for tenant providers. Targets the 'providers' key
  * within the multitenancy config file.
- *
- * @package Categories
  */
 final class ProvidersCategory extends BaseConfigCategory
 {

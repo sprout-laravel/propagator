@@ -8,23 +8,20 @@ namespace Sprout\Propagator\Values;
  *
  * Represents a static method call in a config file,
  * e.g. TenancyOptions::allOverrides().
- *
- * @package Values
  */
 final class MethodCall
 {
     /**
      * Create a new instance
      *
-     * @param class-string         $fqcn
-     * @param string               $method
-     * @param array<int, mixed>    $arguments
+     * @param class-string      $fqcn
+     * @param string            $method
+     * @param array<int, mixed> $arguments
      */
     public function __construct(
         public readonly string $fqcn,
         public readonly string $method,
         public readonly array  $arguments = [],
-    )
-    {
+    ) {
     }
 }

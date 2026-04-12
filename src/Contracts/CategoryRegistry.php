@@ -7,15 +7,13 @@ namespace Sprout\Propagator\Contracts;
  *
  * This contract defines the top-level registry that holds all configurable
  * categories. Packages register categories during boot.
- *
- * @package Contracts
  */
 interface CategoryRegistry
 {
     /**
      * Register a config category
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
+     * @param ConfigCategory $category
      *
      * @return void
      */
@@ -26,14 +24,14 @@ interface CategoryRegistry
      *
      * @param string $name
      *
-     * @return \Sprout\Propagator\Contracts\ConfigCategory
+     * @return ConfigCategory
      */
     public function get(string $name): ConfigCategory;
 
     /**
      * Get all registered categories
      *
-     * @return array<string, \Sprout\Propagator\Contracts\ConfigCategory>
+     * @return array<string, ConfigCategory>
      */
     public function all(): array;
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Sprout\Propagator\Drivers\Resolvers;
 
 use Sprout\Propagator\Contracts\DriverWizard;
+use Sprout\Propagator\Contracts\Field;
 use Sprout\Propagator\Fields\GroupField;
 use Sprout\Propagator\Fields\TextField;
 
@@ -13,8 +14,6 @@ use Sprout\Propagator\Fields\TextField;
  * Driver wizard for the cookie identity resolver. Collects the cookie name
  * and optional cookie options (path and domain) for setting the identity
  * cookie on the response.
- *
- * @package Drivers\Resolvers
  */
 final class CookieResolverWizard implements DriverWizard
 {
@@ -41,7 +40,7 @@ final class CookieResolverWizard implements DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {

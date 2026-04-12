@@ -8,16 +8,14 @@ namespace Sprout\Propagator\Contracts;
  * This contract abstracts user interaction for the wizard system.
  * The command orchestrates flow and evaluates dependencies; the renderer
  * handles input collection.
- *
- * @package Contracts
  */
 interface WizardRenderer
 {
     /**
      * Render a field and collect input from the user
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return mixed
      */

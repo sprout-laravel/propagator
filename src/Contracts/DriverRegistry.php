@@ -7,15 +7,13 @@ namespace Sprout\Propagator\Contracts;
  *
  * This contract defines a registry of driver wizards within a single
  * config category.
- *
- * @package Contracts
  */
 interface DriverRegistry
 {
     /**
      * Add a driver wizard to the registry
      *
-     * @param \Sprout\Propagator\Contracts\DriverWizard $driver
+     * @param DriverWizard $driver
      *
      * @return void
      */
@@ -26,14 +24,14 @@ interface DriverRegistry
      *
      * @param string $name
      *
-     * @return \Sprout\Propagator\Contracts\DriverWizard
+     * @return DriverWizard
      */
     public function get(string $name): DriverWizard;
 
     /**
      * Get all registered driver wizards
      *
-     * @return array<string, \Sprout\Propagator\Contracts\DriverWizard>
+     * @return array<string, DriverWizard>
      */
     public function all(): array;
 

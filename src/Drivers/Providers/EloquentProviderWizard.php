@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Sprout\Propagator\Drivers\Providers;
 
 use Sprout\Propagator\Contracts\DriverWizard;
+use Sprout\Propagator\Contracts\Field;
 use Sprout\Propagator\Fields\ClassField;
 
 /**
@@ -11,8 +12,6 @@ use Sprout\Propagator\Fields\ClassField;
  *
  * Driver wizard for the Eloquent tenant provider. Collects the Eloquent model
  * class that represents the tenant.
- *
- * @package Drivers\Providers
  */
 final class EloquentProviderWizard implements DriverWizard
 {
@@ -39,7 +38,7 @@ final class EloquentProviderWizard implements DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {

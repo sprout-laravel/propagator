@@ -7,8 +7,6 @@ namespace Sprout\Propagator\Values;
  * Class Reference
  *
  * Represents a ::class constant reference in a config file.
- *
- * @package Values
  */
 final class ClassReference
 {
@@ -19,7 +17,6 @@ final class ClassReference
      */
     public function __construct(
         public readonly string $fqcn,
-    )
-    {
+    ) {
     }
 }

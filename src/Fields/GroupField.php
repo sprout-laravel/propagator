@@ -10,18 +10,9 @@ use Sprout\Propagator\Contracts\Field;
  *
  * A field that contains nested sub-fields, producing a nested array
  * in the config output.
- *
- * @package Fields
  */
 final class GroupField extends BaseField
 {
-    /**
-     * The nested fields
-     *
-     * @var array<int, \Sprout\Propagator\Contracts\Field>
-     */
-    private array $fields = [];
-
     /**
      * Create a new group field
      *
@@ -33,6 +24,13 @@ final class GroupField extends BaseField
     {
         return new self($name);
     }
+
+    /**
+     * The nested fields
+     *
+     * @var array<int, Field>
+     */
+    private array $fields = [];
 
     /**
      * Get the type identifier for this field
@@ -47,7 +45,7 @@ final class GroupField extends BaseField
     /**
      * Set the nested fields
      *
-     * @param array<int, \Sprout\Propagator\Contracts\Field> $fields
+     * @param array<int, Field> $fields
      *
      * @return self
      */
@@ -61,7 +59,7 @@ final class GroupField extends BaseField
     /**
      * Get the nested fields
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {

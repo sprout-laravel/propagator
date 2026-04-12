@@ -18,16 +18,14 @@ use function Laravel\Prompts\text;
  * CLI Wizard Renderer
  *
  * Renders wizard fields as interactive CLI prompts using laravel/prompts.
- *
- * @package Renderers
  */
 final class CliWizardRenderer implements WizardRenderer
 {
     /**
      * Render a field and collect input from the user
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return mixed
      */
@@ -35,12 +33,12 @@ final class CliWizardRenderer implements WizardRenderer
     {
         return match ($field->getType()) {
             'text', 'integer', 'class' => $this->renderTextField($field, $currentValue),
-            'boolean'                  => $this->renderBooleanField($field, $currentValue),
-            'select'                   => $this->renderSelectField($field, $currentValue),
-            'env'                      => $this->renderEnvField($field, $currentValue),
-            'group'                    => $this->renderGroupField($field, $currentValue),
-            'array'                    => $this->renderArrayField($field, $currentValue),
-            default                    => $this->renderTextField($field, $currentValue),
+            'boolean' => $this->renderBooleanField($field, $currentValue),
+            'select'  => $this->renderSelectField($field, $currentValue),
+            'env'     => $this->renderEnvField($field, $currentValue),
+            'group'   => $this->renderGroupField($field, $currentValue),
+            'array'   => $this->renderArrayField($field, $currentValue),
+            default   => $this->renderTextField($field, $currentValue),
         };
     }
 
@@ -75,14 +73,14 @@ final class CliWizardRenderer implements WizardRenderer
     /**
      * Render a text-based field
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return string
      */
     private function renderTextField(Field $field, mixed $currentValue): string
     {
-        $raw = $currentValue ?? $field->getDefault() ?? '';
+        $raw     = $currentValue ?? $field->getDefault() ?? '';
         $default = is_scalar($raw) ? (string) $raw : '';
 
         return text(
@@ -95,8 +93,8 @@ final class CliWizardRenderer implements WizardRenderer
     /**
      * Render a boolean field
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return bool
      */
@@ -111,14 +109,14 @@ final class CliWizardRenderer implements WizardRenderer
     /**
      * Render a select field
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return string
      */
     private function renderSelectField(Field $field, mixed $currentValue): string
     {
-        /** @var \Sprout\Propagator\Fields\SelectField $field */
+        /** @var SelectField $field */
         $default = $currentValue ?? $field->getDefault();
 
         return (string) select(
@@ -134,26 +132,26 @@ final class CliWizardRenderer implements WizardRenderer
      * Collects the env key and optionally a fallback value, returning
      * an EnvValue instance.
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
-     * @return \Sprout\Propagator\Values\EnvValue
+     * @return EnvValue
      */
     private function renderEnvField(Field $field, mixed $currentValue): EnvValue
     {
-        /** @var \Sprout\Propagator\Fields\EnvField $field */
+        /** @var EnvField $field */
         $envKey = text(
             label: $field->getLabel() . ' (env variable name)',
             default: $field->getEnvKey() ?? '',
             required: $field->isRequired(),
         );
 
-        $fallback = null;
+        $fallback      = null;
         $fallbackField = $field->getFallback();
 
         if ($fallbackField !== null) {
             $currentFallback = $currentValue instanceof EnvValue ? $currentValue->fallback : null;
-            $fallback = $this->renderField($fallbackField, $currentFallback);
+            $fallback        = $this->renderField($fallbackField, $currentFallback);
         }
 
         return new EnvValue($envKey, $fallback);
@@ -162,15 +160,15 @@ final class CliWizardRenderer implements WizardRenderer
     /**
      * Render a group field by rendering each nested field
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return array<string, mixed>
      */
     private function renderGroupField(Field $field, mixed $currentValue): array
     {
-        /** @var \Sprout\Propagator\Fields\GroupField $field */
-        $values = [];
+        /** @var GroupField $field */
+        $values  = [];
         $current = is_array($currentValue) ? $currentValue : [];
 
         foreach ($field->getFields() as $child) {
@@ -186,8 +184,8 @@ final class CliWizardRenderer implements WizardRenderer
     /**
      * Render an array field by collecting items until the user stops
      *
-     * @param \Sprout\Propagator\Contracts\Field $field
-     * @param mixed                              $currentValue
+     * @param Field $field
+     * @param mixed $currentValue
      *
      * @return array<int, string>
      */

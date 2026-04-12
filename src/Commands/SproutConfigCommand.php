@@ -18,8 +18,6 @@ use Sprout\Propagator\Support\ConfigWriter;
  * Interactive Artisan command for managing Sprout configuration.
  * Supports add, edit, and delete actions across all registered
  * config categories.
- *
- * @package Commands
  */
 final class SproutConfigCommand extends Command
 {
@@ -43,10 +41,10 @@ final class SproutConfigCommand extends Command
     /**
      * Execute the console command
      *
-     * @param \Sprout\Propagator\Contracts\CategoryRegistry $registry
-     * @param \Sprout\Propagator\Contracts\WizardRenderer   $renderer
-     * @param \Illuminate\Contracts\Config\Repository       $config
-     * @param \Sprout\Propagator\Support\ConfigWriter       $writer
+     * @param CategoryRegistry $registry
+     * @param WizardRenderer   $renderer
+     * @param Repository       $config
+     * @param ConfigWriter     $writer
      *
      * @return int
      */
@@ -55,8 +53,7 @@ final class SproutConfigCommand extends Command
         WizardRenderer   $renderer,
         Repository       $config,
         ConfigWriter     $writer,
-    ): int
-    {
+    ): int {
         $action   = $this->resolveAction($renderer);
         $category = $this->resolveCategory($registry, $renderer);
 
@@ -71,7 +68,7 @@ final class SproutConfigCommand extends Command
     /**
      * Resolve the action from arguments or prompt
      *
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
+     * @param WizardRenderer $renderer
      *
      * @return string
      */
@@ -94,10 +91,10 @@ final class SproutConfigCommand extends Command
     /**
      * Resolve the category from arguments or prompt
      *
-     * @param \Sprout\Propagator\Contracts\CategoryRegistry $registry
-     * @param \Sprout\Propagator\Contracts\WizardRenderer   $renderer
+     * @param CategoryRegistry $registry
+     * @param WizardRenderer   $renderer
      *
-     * @return \Sprout\Propagator\Contracts\ConfigCategory
+     * @return ConfigCategory
      */
     private function resolveCategory(CategoryRegistry $registry, WizardRenderer $renderer): ConfigCategory
     {
@@ -122,10 +119,10 @@ final class SproutConfigCommand extends Command
     /**
      * Handle the add action
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
-     * @param \Illuminate\Contracts\Config\Repository     $config
-     * @param \Sprout\Propagator\Support\ConfigWriter     $writer
+     * @param ConfigCategory $category
+     * @param WizardRenderer $renderer
+     * @param Repository     $config
+     * @param ConfigWriter   $writer
      *
      * @return int
      */
@@ -134,8 +131,7 @@ final class SproutConfigCommand extends Command
         WizardRenderer $renderer,
         Repository     $config,
         ConfigWriter   $writer,
-    ): int
-    {
+    ): int {
         $driverOptions = [];
 
         foreach ($category->drivers()->all() as $driver) {
@@ -162,10 +158,10 @@ final class SproutConfigCommand extends Command
     /**
      * Handle the edit action
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
-     * @param \Illuminate\Contracts\Config\Repository     $config
-     * @param \Sprout\Propagator\Support\ConfigWriter     $writer
+     * @param ConfigCategory $category
+     * @param WizardRenderer $renderer
+     * @param Repository     $config
+     * @param ConfigWriter   $writer
      *
      * @return int
      */
@@ -174,8 +170,7 @@ final class SproutConfigCommand extends Command
         WizardRenderer $renderer,
         Repository     $config,
         ConfigWriter   $writer,
-    ): int
-    {
+    ): int {
         $entryName = $this->resolveEntryName($category, $renderer, $config);
         $existing  = $category->getEntry($entryName, $config);
 
@@ -198,10 +193,10 @@ final class SproutConfigCommand extends Command
     /**
      * Handle the delete action
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
-     * @param \Illuminate\Contracts\Config\Repository     $config
-     * @param \Sprout\Propagator\Support\ConfigWriter     $writer
+     * @param ConfigCategory $category
+     * @param WizardRenderer $renderer
+     * @param Repository     $config
+     * @param ConfigWriter   $writer
      *
      * @return int
      */
@@ -210,8 +205,7 @@ final class SproutConfigCommand extends Command
         WizardRenderer $renderer,
         Repository     $config,
         ConfigWriter   $writer,
-    ): int
-    {
+    ): int {
         $entryName = $this->resolveEntryName($category, $renderer, $config);
         $existing  = $category->getEntry($entryName, $config);
 
@@ -233,9 +227,9 @@ final class SproutConfigCommand extends Command
     /**
      * Resolve an entry name from arguments or prompt
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
-     * @param \Illuminate\Contracts\Config\Repository     $config
+     * @param ConfigCategory $category
+     * @param WizardRenderer $renderer
+     * @param Repository     $config
      *
      * @return string
      */
@@ -243,8 +237,7 @@ final class SproutConfigCommand extends Command
         ConfigCategory $category,
         WizardRenderer $renderer,
         Repository     $config,
-    ): string
-    {
+    ): string {
         /** @var string|null $name */
         $name = $this->argument('name');
 
@@ -261,9 +254,9 @@ final class SproutConfigCommand extends Command
     /**
      * Collect field values from the user
      *
-     * @param \Sprout\Propagator\Contracts\DriverWizard   $driver
-     * @param \Sprout\Propagator\Contracts\WizardRenderer $renderer
-     * @param array<string, mixed>|null                   $currentValues
+     * @param DriverWizard              $driver
+     * @param WizardRenderer            $renderer
+     * @param array<string, mixed>|null $currentValues
      *
      * @return array<string, mixed>
      */
@@ -271,8 +264,7 @@ final class SproutConfigCommand extends Command
         DriverWizard   $driver,
         WizardRenderer $renderer,
         ?array         $currentValues = null,
-    ): array
-    {
+    ): array {
         $values = [];
 
         foreach ($driver->getFields() as $field) {
@@ -292,11 +284,11 @@ final class SproutConfigCommand extends Command
     /**
      * Apply config changes based on the current mode
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param string                                      $entryName
-     * @param array<string, mixed>|null                   $entry
-     * @param \Illuminate\Contracts\Config\Repository     $config
-     * @param \Sprout\Propagator\Support\ConfigWriter     $writer
+     * @param ConfigCategory            $category
+     * @param string                    $entryName
+     * @param array<string, mixed>|null $entry
+     * @param Repository                $config
+     * @param ConfigWriter              $writer
      *
      * @return int
      */
@@ -306,8 +298,7 @@ final class SproutConfigCommand extends Command
         ?array         $entry,
         Repository     $config,
         ConfigWriter   $writer,
-    ): int
-    {
+    ): int {
         $mode = $config->get('propagator.mode', 'managed');
 
         if ($mode === 'manual') {
@@ -320,9 +311,9 @@ final class SproutConfigCommand extends Command
     /**
      * Display a config snippet for manual mode
      *
-     * @param string                                  $entryName
-     * @param array<string, mixed>|null               $entry
-     * @param \Sprout\Propagator\Support\ConfigWriter $writer
+     * @param string                    $entryName
+     * @param array<string, mixed>|null $entry
+     * @param ConfigWriter              $writer
      *
      * @return int
      */
@@ -343,11 +334,11 @@ final class SproutConfigCommand extends Command
     /**
      * Write the config file in managed mode
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
-     * @param string                                      $entryName
-     * @param array<string, mixed>|null                   $entry
-     * @param \Illuminate\Contracts\Config\Repository     $config
-     * @param \Sprout\Propagator\Support\ConfigWriter     $writer
+     * @param ConfigCategory            $category
+     * @param string                    $entryName
+     * @param array<string, mixed>|null $entry
+     * @param Repository                $config
+     * @param ConfigWriter              $writer
      *
      * @return int
      */
@@ -357,8 +348,7 @@ final class SproutConfigCommand extends Command
         ?array         $entry,
         Repository     $config,
         ConfigWriter   $writer,
-    ): int
-    {
+    ): int {
         $configFile = $category->getConfigFile();
         $configKey  = $category->getConfigKey();
         $filePath   = config_path($configFile . '.php');

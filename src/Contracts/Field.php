@@ -10,8 +10,6 @@ use Sprout\Propagator\Fields\FieldDependency;
  * This contract marks a class as being a field definition within a wizard
  * driver's field schema. Fields describe what data to collect, not how
  * to render it.
- *
- * @package Contracts
  */
 interface Field
 {
@@ -67,7 +65,7 @@ interface Field
      * If set, the field should only be presented when the dependency
      * condition is met.
      *
-     * @return \Sprout\Propagator\Fields\FieldDependency|null
+     * @return FieldDependency|null
      */
     public function getDependency(): ?FieldDependency;
 }

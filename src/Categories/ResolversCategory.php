@@ -14,8 +14,6 @@ use Sprout\Propagator\Drivers\Resolvers\SubdomainResolverWizard;
  *
  * Config category for identity resolvers. Targets the 'resolvers' key
  * within the multitenancy config file.
- *
- * @package Categories
  */
 final class ResolversCategory extends BaseConfigCategory
 {

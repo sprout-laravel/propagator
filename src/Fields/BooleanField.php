@@ -7,8 +7,6 @@ namespace Sprout\Propagator\Fields;
  * Boolean Field
  *
  * A field that collects a yes/no boolean value.
- *
- * @package Fields
  */
 final class BooleanField extends BaseField
 {

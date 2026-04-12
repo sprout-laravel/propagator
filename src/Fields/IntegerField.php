@@ -7,8 +7,6 @@ namespace Sprout\Propagator\Fields;
  * Integer Field
  *
  * A field that collects numeric integer input.
- *
- * @package Fields
  */
 final class IntegerField extends BaseField
 {

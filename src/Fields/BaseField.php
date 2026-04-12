@@ -11,8 +11,6 @@ use Sprout\Propagator\Contracts\Field;
  * Abstract base class for all field types. Provides the fluent builder API
  * and common state. Each concrete field type extends this class and
  * provides its own type identifier.
- *
- * @package Fields
  */
 abstract class BaseField implements Field
 {
@@ -47,7 +45,7 @@ abstract class BaseField implements Field
     /**
      * Cross-field dependency
      *
-     * @var \Sprout\Propagator\Fields\FieldDependency|null
+     * @var FieldDependency|null
      */
     private ?FieldDependency $dependency = null;
 
@@ -58,8 +56,7 @@ abstract class BaseField implements Field
      */
     public function __construct(
         private readonly string $name,
-    )
-    {
+    ) {
         $this->label = $name;
     }
 
@@ -116,7 +113,7 @@ abstract class BaseField implements Field
     /**
      * Get the cross-field dependency for this field
      *
-     * @return \Sprout\Propagator\Fields\FieldDependency|null
+     * @return FieldDependency|null
      */
     public function getDependency(): ?FieldDependency
     {
@@ -180,7 +177,7 @@ abstract class BaseField implements Field
     /**
      * Set a cross-field dependency
      *
-     * @param \Sprout\Propagator\Fields\FieldDependency $dependency
+     * @param FieldDependency $dependency
      *
      * @return static
      */

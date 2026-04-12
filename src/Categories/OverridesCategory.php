@@ -12,8 +12,6 @@ use Sprout\Propagator\Values\ClassReference;
  * config file. Unlike other categories, driver values are wrapped in a
  * ClassReference because override drivers are identified by their FQCN
  * rather than a short string alias.
- *
- * @package Categories
  */
 final class OverridesCategory extends BaseConfigCategory
 {

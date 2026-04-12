@@ -11,25 +11,9 @@ use Sprout\Propagator\Contracts\Field;
  * A field that represents an environment variable reference in config.
  * Supports recursive fallbacks where the fallback can be any other field,
  * including another EnvField.
- *
- * @package Fields
  */
 final class EnvField extends BaseField
 {
-    /**
-     * The environment variable key
-     *
-     * @var string|null
-     */
-    private ?string $envKey = null;
-
-    /**
-     * The fallback field
-     *
-     * @var \Sprout\Propagator\Contracts\Field|null
-     */
-    private ?Field $fallback = null;
-
     /**
      * Create a new env field
      *
@@ -41,6 +25,20 @@ final class EnvField extends BaseField
     {
         return new self($name);
     }
+
+    /**
+     * The environment variable key
+     *
+     * @var string|null
+     */
+    private ?string $envKey = null;
+
+    /**
+     * The fallback field
+     *
+     * @var Field|null
+     */
+    private ?Field $fallback = null;
 
     /**
      * Get the type identifier for this field
@@ -82,7 +80,7 @@ final class EnvField extends BaseField
      * The fallback can be any field type, including another EnvField
      * for recursive env() calls.
      *
-     * @param \Sprout\Propagator\Contracts\Field $fallback
+     * @param Field $fallback
      *
      * @return self
      */
@@ -96,7 +94,7 @@ final class EnvField extends BaseField
     /**
      * Get the fallback field
      *
-     * @return \Sprout\Propagator\Contracts\Field|null
+     * @return Field|null
      */
     public function getFallback(): ?Field
     {

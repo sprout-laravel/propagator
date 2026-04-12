@@ -10,8 +10,6 @@ use Illuminate\Contracts\Config\Repository;
  * This contract marks a class as being a configurable category within Sprout.
  * Each category knows which config file and key it targets, how to read
  * existing entries, and how to build new entries from wizard-collected values.
- *
- * @package Contracts
  */
 interface ConfigCategory
 {
@@ -52,7 +50,7 @@ interface ConfigCategory
     /**
      * Get all existing entries for this category
      *
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param Repository $config
      *
      * @return array<string, array<string, mixed>>
      */
@@ -61,8 +59,8 @@ interface ConfigCategory
     /**
      * Get a single existing entry by name
      *
-     * @param string                                  $name
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param string     $name
+     * @param Repository $config
      *
      * @return array<string, mixed>|null
      */
@@ -85,7 +83,7 @@ interface ConfigCategory
     /**
      * Get the driver registry for this category
      *
-     * @return \Sprout\Propagator\Contracts\DriverRegistry
+     * @return DriverRegistry
      */
     public function drivers(): DriverRegistry;
 }

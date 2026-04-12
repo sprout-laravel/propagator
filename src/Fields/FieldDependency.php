@@ -8,24 +8,9 @@ namespace Sprout\Propagator\Fields;
  *
  * Represents a cross-field dependency condition. A field with a dependency
  * should only be presented when the condition is met.
- *
- * @package Fields
  */
 final class FieldDependency
 {
-    /**
-     * Create a new instance
-     *
-     * @param string $fieldName
-     * @param mixed  $expectedValue
-     */
-    private function __construct(
-        private readonly string $fieldName,
-        private readonly mixed  $expectedValue,
-    )
-    {
-    }
-
     /**
      * Create a dependency that is met when a field has a specific value
      *
@@ -37,6 +22,18 @@ final class FieldDependency
     public static function when(string $fieldName, mixed $expectedValue): self
     {
         return new self($fieldName, $expectedValue);
+    }
+
+    /**
+     * Create a new instance
+     *
+     * @param string $fieldName
+     * @param mixed  $expectedValue
+     */
+    private function __construct(
+        private readonly string $fieldName,
+        private readonly mixed  $expectedValue,
+    ) {
     }
 
     /**

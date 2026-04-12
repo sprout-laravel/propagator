@@ -12,22 +12,20 @@ use Sprout\Propagator\Contracts\ConfigCategory;
  *
  * The default implementation of the category registry, storing categories
  * in an array keyed by name.
- *
- * @package Support
  */
 final class DefaultCategoryRegistry implements CategoryRegistry
 {
     /**
      * The registered categories
      *
-     * @var array<string, \Sprout\Propagator\Contracts\ConfigCategory>
+     * @var array<string, ConfigCategory>
      */
     private array $categories = [];
 
     /**
      * Register a config category
      *
-     * @param \Sprout\Propagator\Contracts\ConfigCategory $category
+     * @param ConfigCategory $category
      *
      * @return void
      */
@@ -41,9 +39,9 @@ final class DefaultCategoryRegistry implements CategoryRegistry
      *
      * @param string $name
      *
-     * @return \Sprout\Propagator\Contracts\ConfigCategory
+     * @return ConfigCategory
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function get(string $name): ConfigCategory
     {
@@ -57,7 +55,7 @@ final class DefaultCategoryRegistry implements CategoryRegistry
     /**
      * Get all registered categories
      *
-     * @return array<string, \Sprout\Propagator\Contracts\ConfigCategory>
+     * @return array<string, ConfigCategory>
      */
     public function all(): array
     {

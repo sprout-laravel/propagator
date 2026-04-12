@@ -20,8 +20,6 @@ use Sprout\Propagator\Support\DefaultCategoryRegistry;
  *
  * Registers all Propagator bindings, commands, and built-in config
  * categories with the Laravel application.
- *
- * @package Core
  */
 class PropagatorServiceProvider extends ServiceProvider
 {
@@ -58,7 +56,7 @@ class PropagatorServiceProvider extends ServiceProvider
      */
     private function registerCategories(): void
     {
-        /** @var \Sprout\Propagator\Contracts\CategoryRegistry $registry */
+        /** @var CategoryRegistry $registry */
         $registry = $this->app->make(CategoryRegistry::class);
 
         $registry->register(new ResolversCategory());

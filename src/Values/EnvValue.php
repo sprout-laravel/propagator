@@ -8,8 +8,6 @@ namespace Sprout\Propagator\Values;
  *
  * Represents an env() call in a config file. Supports recursive fallbacks
  * where the fallback can itself be an EnvValue.
- *
- * @package Values
  */
 final class EnvValue
 {
@@ -22,7 +20,6 @@ final class EnvValue
     public function __construct(
         public readonly string $key,
         public readonly mixed  $fallback = null,
-    )
-    {
+    ) {
     }
 }

@@ -10,8 +10,6 @@ use Sprout\Propagator\Drivers\Tenancies\DefaultTenancyWizard;
  *
  * Config category for tenancies. Targets the 'tenancies' key
  * within the multitenancy config file.
- *
- * @package Categories
  */
 final class TenanciesCategory extends BaseConfigCategory
 {

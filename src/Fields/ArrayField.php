@@ -7,8 +7,6 @@ namespace Sprout\Propagator\Fields;
  * Array Field
  *
  * A field that collects multiple values as an array.
- *
- * @package Fields
  */
 final class ArrayField extends BaseField
 {

@@ -12,22 +12,20 @@ use Sprout\Propagator\Contracts\DriverWizard;
  *
  * The default implementation of the driver registry, storing driver wizards
  * in an array keyed by name.
- *
- * @package Support
  */
 final class DefaultDriverRegistry implements DriverRegistry
 {
     /**
      * The registered driver wizards
      *
-     * @var array<string, \Sprout\Propagator\Contracts\DriverWizard>
+     * @var array<string, DriverWizard>
      */
     private array $drivers = [];
 
     /**
      * Add a driver wizard to the registry
      *
-     * @param \Sprout\Propagator\Contracts\DriverWizard $driver
+     * @param DriverWizard $driver
      *
      * @return void
      */
@@ -41,9 +39,9 @@ final class DefaultDriverRegistry implements DriverRegistry
      *
      * @param string $name
      *
-     * @return \Sprout\Propagator\Contracts\DriverWizard
+     * @return DriverWizard
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function get(string $name): DriverWizard
     {
@@ -57,7 +55,7 @@ final class DefaultDriverRegistry implements DriverRegistry
     /**
      * Get all registered driver wizards
      *
-     * @return array<string, \Sprout\Propagator\Contracts\DriverWizard>
+     * @return array<string, DriverWizard>
      */
     public function all(): array
     {

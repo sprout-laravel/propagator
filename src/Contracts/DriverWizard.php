@@ -8,8 +8,6 @@ namespace Sprout\Propagator\Contracts;
  * This contract marks a class as being a wizard definition for a specific
  * driver within a config category. It declares the field schema needed
  * to configure the driver.
- *
- * @package Contracts
  */
 interface DriverWizard
 {
@@ -30,7 +28,7 @@ interface DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array;
 }

@@ -12,8 +12,6 @@ use Sprout\Propagator\Values\MethodCall;
  *
  * Serialises a config array to a PHP file string. Handles value objects
  * (EnvValue, ClassReference, MethodCall) alongside scalars and nested arrays.
- *
- * @package Support
  */
 final class ConfigWriter
 {
@@ -41,8 +39,8 @@ final class ConfigWriter
      */
     private function renderArray(array $array, int $depth): string
     {
-        $indent = str_repeat('    ', $depth);
-        $output = '';
+        $indent       = str_repeat('    ', $depth);
+        $output       = '';
         $isSequential = array_is_list($array);
 
         foreach ($array as $key => $value) {
@@ -110,8 +108,8 @@ final class ConfigWriter
     /**
      * Render an EnvValue, handling recursive fallbacks
      *
-     * @param \Sprout\Propagator\Values\EnvValue $value
-     * @param int                                $depth
+     * @param EnvValue $value
+     * @param int      $depth
      *
      * @return string
      */
@@ -129,7 +127,7 @@ final class ConfigWriter
     /**
      * Render a MethodCall value
      *
-     * @param \Sprout\Propagator\Values\MethodCall $value
+     * @param MethodCall $value
      *
      * @return string
      */
@@ -139,7 +137,7 @@ final class ConfigWriter
 
         if (! empty($value->arguments)) {
             $rendered = array_map(fn (mixed $arg) => $this->renderValue($arg, 0), $value->arguments);
-            $args = implode(', ', $rendered);
+            $args     = implode(', ', $rendered);
         }
 
         return '\\' . $value->fqcn . '::' . $value->method . '(' . $args . ')';

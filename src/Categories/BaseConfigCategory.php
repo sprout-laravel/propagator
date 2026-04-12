@@ -14,15 +14,13 @@ use Sprout\Propagator\Support\DefaultDriverRegistry;
  * Abstract base class for config categories. Provides common config reading
  * logic and driver registry management. Subclasses define the config file,
  * key, and entry structure.
- *
- * @package Categories
  */
 abstract class BaseConfigCategory implements ConfigCategory
 {
     /**
      * The driver registry for this category
      *
-     * @var \Sprout\Propagator\Contracts\DriverRegistry
+     * @var DriverRegistry
      */
     private DriverRegistry $drivers;
 
@@ -36,32 +34,9 @@ abstract class BaseConfigCategory implements ConfigCategory
     }
 
     /**
-     * Register the built-in drivers for this category
-     *
-     * @return void
-     */
-    abstract protected function registerDrivers(): void;
-
-    /**
-     * Get the full config path for reading from the repository
-     *
-     * @return string
-     */
-    private function getFullConfigPath(): string
-    {
-        $key = $this->getConfigKey();
-
-        if ($key === '') {
-            return $this->getConfigFile();
-        }
-
-        return $this->getConfigFile() . '.' . $key;
-    }
-
-    /**
      * Get all existing entries for this category
      *
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param Repository $config
      *
      * @return array<string, array<string, mixed>>
      */
@@ -76,8 +51,8 @@ abstract class BaseConfigCategory implements ConfigCategory
     /**
      * Get a single existing entry by name
      *
-     * @param string                                  $name
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param string     $name
+     * @param Repository $config
      *
      * @return array<string, mixed>|null
      */
@@ -109,10 +84,33 @@ abstract class BaseConfigCategory implements ConfigCategory
     /**
      * Get the driver registry for this category
      *
-     * @return \Sprout\Propagator\Contracts\DriverRegistry
+     * @return DriverRegistry
      */
     public function drivers(): DriverRegistry
     {
         return $this->drivers;
+    }
+
+    /**
+     * Register the built-in drivers for this category
+     *
+     * @return void
+     */
+    abstract protected function registerDrivers(): void;
+
+    /**
+     * Get the full config path for reading from the repository
+     *
+     * @return string
+     */
+    private function getFullConfigPath(): string
+    {
+        $key = $this->getConfigKey();
+
+        if ($key === '') {
+            return $this->getConfigFile();
+        }
+
+        return $this->getConfigFile() . '.' . $key;
     }
 }

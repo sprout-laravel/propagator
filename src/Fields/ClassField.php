@@ -7,8 +7,6 @@ namespace Sprout\Propagator\Fields;
  * Class Field
  *
  * A field that collects a fully qualified class name.
- *
- * @package Fields
  */
 final class ClassField extends BaseField
 {

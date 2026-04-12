@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Sprout\Propagator\Drivers\Resolvers;
 
 use Sprout\Propagator\Contracts\DriverWizard;
+use Sprout\Propagator\Contracts\Field;
 use Sprout\Propagator\Fields\TextField;
 
 /**
@@ -11,8 +12,6 @@ use Sprout\Propagator\Fields\TextField;
  *
  * Driver wizard for the session identity resolver. Collects the session key
  * under which the tenant identifier is stored.
- *
- * @package Drivers\Resolvers
  */
 final class SessionResolverWizard implements DriverWizard
 {
@@ -39,7 +38,7 @@ final class SessionResolverWizard implements DriverWizard
     /**
      * Get the field schema for this driver
      *
-     * @return array<int, \Sprout\Propagator\Contracts\Field>
+     * @return array<int, Field>
      */
     public function getFields(): array
     {
