@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace Sprout\Propagator\Tests\Unit\Renderers;
 
+use Laravel\Prompts\ConfirmPrompt;
 use Laravel\Prompts\Prompt;
+use Laravel\Prompts\SelectPrompt;
+use Laravel\Prompts\TextPrompt;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Sprout\Propagator\Contracts\WizardRenderer;
@@ -34,8 +37,18 @@ final class CliWizardRendererTest extends UnitTestCase
     {
         parent::setUp();
 
-        // Force prompts into non-interactive mode so they return default values
-        // without requiring a real terminal
+        // Make prompts deterministic regardless of test execution order.
+        // laravel/prompts holds sticky static state per Prompt subclass — once
+        // any Artisan command boots in the process, Laravel's ConfiguresPrompts
+        // registers Symfony-backed fallbacks that try to read STDIN, and
+        // Prompt::$shouldFallback latches on permanently. Overwriting those
+        // entries here with closures that return the prompt's default isolates
+        // this class from order-dependent failures.
+        TextPrompt::fallbackUsing(fn (TextPrompt $p) => $p->default);
+        ConfirmPrompt::fallbackUsing(fn (ConfirmPrompt $p) => $p->default);
+        SelectPrompt::fallbackUsing(fn (SelectPrompt $p) => $p->default);
+
+        Prompt::fallbackWhen(true);
         Prompt::interactive(false);
 
         $this->renderer = new CliWizardRenderer();
@@ -43,7 +56,6 @@ final class CliWizardRendererTest extends UnitTestCase
 
     protected function tearDown(): void
     {
-        // Re-enable interactive mode for other tests
         Prompt::interactive();
 
         parent::tearDown();
